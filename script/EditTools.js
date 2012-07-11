@@ -370,14 +370,14 @@ function RotateTool(collageCanvas){
 			This.tempctx = This.cc.canvasArray[This.cc.canvasArray.length-1];
 			This.tempctx.save();
 			This.tempctx.translate(This.center.x, This.center.y);
-			This.tempctx.rotate(angle);
+			This.tempctx.rotate(This.angle);
 			This.tempctx.strokeRect(-This.currentImageSize.w/2, -This.currentImageSize.h/2, This.currentImageSize.w, This.currentImageSize.h);
 			This.tempctx.restore();
 		}
 		else{
 			This.cc.ctx.save();
 			This.cc.ctx.translate(This.center.x, This.center.y);
-			This.cc.ctx.rotate(angle);
+			This.cc.ctx.rotate(This.angle);
 			This.cc.ctx.strokeRect(-This.currentImageSize.w/2, -This.currentImageSize.h/2, This.currentImageSize.w, This.currentImageSize.h);
 			This.cc.ctx.restore();
 		}
@@ -402,10 +402,10 @@ function RotateTool(collageCanvas){
 		};
 
 		var pts = new Array();
-		pts.push(rotateAroundPoint(upperLeft, This.center, angle));
-		pts.push(rotateAroundPoint(upperRight, This.center, angle));
-		pts.push(rotateAroundPoint(lowerLeft, This.center, angle));
-		pts.push(rotateAroundPoint(lowerRight, This.center, angle));
+		pts.push(rotateAroundPoint(upperLeft, This.center, This.angle));
+		pts.push(rotateAroundPoint(upperRight, This.center, This.angle));
+		pts.push(rotateAroundPoint(lowerLeft, This.center, This.angle));
+		pts.push(rotateAroundPoint(lowerRight, This.center, This.angle));
 
 		for(var i=0;i<4;i++){
 			if(x > pts[i].x - EDGE_MARGIN && x < pts[i].x + EDGE_MARGIN && y > pts[i].y - EDGE_MARGIN && y < pts[i].y + EDGE_MARGIN){
@@ -434,7 +434,7 @@ function RotateTool(collageCanvas){
 			if(tmp < 0)
 				theta = -theta;
 			This.cc.layerArray[This.cc.focusedLayer].applyAngleOffset(theta);
-			var angle = This.cc.layerArray[This.cc.focusedLayer].angle;
+			This.angle = This.cc.layerArray[This.cc.focusedLayer].angle;
 
 			// redraw
 			This.cc.draw();
@@ -443,14 +443,14 @@ function RotateTool(collageCanvas){
 			if(MULTI_CANVAS == true){
 				This.tempctx.save();
 				This.tempctx.translate(This.center.x, This.center.y);
-				This.tempctx.rotate(angle);
+				This.tempctx.rotate(This.angle);
 				This.tempctx.strokeRect(-This.currentImageSize.w/2, -This.currentImageSize.h/2, This.currentImageSize.w, This.currentImageSize.h);
 				This.tempctx.restore();
 			}
 			else{
 				This.cc.ctx.save();
 				This.cc.ctx.translate(This.center.x, This.center.y);
-				This.cc.ctx.rotate(angle);
+				This.cc.ctx.rotate(This.angle);
 				This.cc.ctx.strokeRect(-This.currentImageSize.w/2, -This.currentImageSize.h/2, This.currentImageSize.w, This.currentImageSize.h);
 				This.cc.ctx.restore();
 			}

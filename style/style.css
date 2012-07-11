@@ -1,22 +1,35 @@
 html            {   height: 100%; }
-body            {   height: 100%; }
+body            {   
+                    height: 100%; 
+                    padding: 0;
+                    margin: 0;
+                }
 
 @leftPaneWidth: 100px;
 
 div#mainPane    {   height: 100%; 
-                    min-height: 600px; 
+                    min-height: 600px;
+                    width: 100%;
+                    min-width: 800px;
                     position: relative;
+                    /*position: absolute;
+                    top: 0px;
+                    left: 0px;*/
                 }
 
 div#leftPane    {   width: @leftPaneWidth; 
                     height: 100%;
+                    position: absolute;
+                    left: 0px;
+                    top: 0px;
                 }
 
 div#middlePane  {   position: absolute; 
-                    left: @leftPaneWidth; 
-                    top:0px;
+                    left: @leftPaneWidth;
+                    top: 0px;
                     height: 100%;
-										border: dotted 1px #aaaaaa;
+                    border-left: dotted 1px #777777;
+                    border-right: dotted 1px #777777;
                 }
 
 div#rightPane   {   width: 300px; 
@@ -27,7 +40,15 @@ div#rightPane   {   width: 300px;
                 }
 
 div.canvasDiv   {   position: absolute;
-									  left: 0px;
+					left: 0px;
                     top: 0px;
-								}
+				}
 
+@logoWidth: 44px;
+@logoHeight: 36px;
+
+div#logo        {
+                    width: @logoWidth;
+                    height: @logoHeight;
+                    background-image:url('../img/annachen_me.png'); 
+                }

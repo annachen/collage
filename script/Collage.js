@@ -31,18 +31,19 @@ function initDisplay(){
 
 	var all = $("#mainPane").innerWidth();
 	var left = $("#leftPane").outerWidth();
-	var right = $("#rightPane").outerWidth();
-	$("#middlePane").width(all - left - right);
-	$("#previewDiv").width(right);
+	var rightOut = $("#rightPane").outerWidth();
+	var rightIn = $("#rightPane").innerWidth();
+	$("#middlePane").width(all - left - rightOut);
+	$("#previewDiv").width(rightIn);
 
 	//$("#mainCanvas").attr("width", all-left-right);
-	window.collageCanvas.size(all-left-right, $("#middlePane").innerHeight());
-	window.previewCanvas.size(right, 300);
+	window.collageCanvas.size($("#middlePane").innerWidth(), $("#middlePane").innerHeight());
+	window.previewCanvas.size($("#previewDiv").innerWidth(), 300);
 	//window.collageCanvas.updateUI();
 	//$("#previewCanvas").attr("width", right);
 
-	$("#mainCanvas").css("border", "solid 1px black");
-	$("#previewCanvas").css("border", "solid 1px black");
+	//$("#mainCanvas").css("border", "solid 1px black");
+	//$("#previewCanvas").css("border", "none");
 }
 
 function initEvents(){
@@ -112,3 +113,26 @@ function initTool(){
 	$("#tool-move").attr('checked', 'checked');
 	window.collageCanvas.setTool(TOOL_MOVE);
 }
+
+/*
+function dis
+
+(function($){
+
+$.fn.disableSelection = function() {
+    return this.each(function() {           
+        $(this).attr('unselectable', 'on')
+               .css({
+                   '-moz-user-select':'none',
+                   '-webkit-user-select':'none',
+                   'user-select':'none',
+                   '-ms-user-select':'none'
+               })
+               .each(function() {
+                   this.onselectstart = function() { return false; };
+               });
+    });
+};
+
+})(jQuery);
+*/

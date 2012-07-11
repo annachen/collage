@@ -133,9 +133,20 @@ function Layer(link){
 			var widthRatio = This.sizeW / This.image.width;
 			var heightRatio = This.sizeH / This.image.height;
 			ctx.beginPath();
-			ctx.moveTo(This.posX + This.cutEdgePoints[0].x * widthRatio, This.posY + This.cutEdgePoints[0].y * heightRatio);
-			for(var i=1;i<This.cutEdgePoints.length;i++){
-				ctx.lineTo(This.posX + This.cutEdgePoints[i].x * widthRatio, This.posY + This.cutEdgePoints[i].y * heightRatio);
+			var center = {
+				x: This.posX + This.sizeW/2,
+				y: This.posY + This.sizeH/2
+			};
+			for(var i=0;i<This.cutEdgePoints.length;i++){
+				var pt = {
+					x: This.posX + This.cutEdgePoints[i].x * widthRatio,
+					y: This.posY + This.cutEdgePoints[i].y * heightRatio
+				};
+				pt = rotateAroundPoint(pt, center, This.angle);
+				if(i == 0)
+					ctx.moveTo(pt.x, pt.y);
+				else
+					ctx.lineTo(pt.x, pt.y);
 			}
 			ctx.closePath();
 			ctx.clip();
