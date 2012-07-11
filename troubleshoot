@@ -1,0 +1,5 @@
+
+To use ssh instead of username/password for git:
+git config remote.origin.url git@github.com:annachen/collage.git
+
+The src path to background-image in css is relative to the css file itself, in particular, not relative to index.html, or wherever the css file is included.
