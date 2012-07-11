@@ -1,0 +1,33 @@
+html            {   height: 100%; }
+body            {   height: 100%; }
+
+@leftPaneWidth: 100px;
+
+div#mainPane    {   height: 100%; 
+                    min-height: 600px; 
+                    position: relative;
+                }
+
+div#leftPane    {   width: @leftPaneWidth; 
+                    height: 100%;
+                }
+
+div#middlePane  {   position: absolute; 
+                    left: @leftPaneWidth; 
+                    top:0px;
+                    height: 100%;
+										border: dotted 1px #aaaaaa;
+                }
+
+div#rightPane   {   width: 300px; 
+                    height: 100%;
+                    position: absolute;
+                    top: 0px;
+                    right: 0px;
+                }
+
+div.canvasDiv   {   position: absolute;
+									  left: 0px;
+                    top: 0px;
+								}
+
