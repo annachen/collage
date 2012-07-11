@@ -1,7 +1,6 @@
 
 const LAYER_FOCUS_BG = '#aaaaff';
 const LAYER_UNFOCUS_BG = '#ffffff';
-const LAYER_CLASS = 'layer';
 const LAYER_CLASS_LENGTH = 5; // length of the class name
 
 function Layer(link){

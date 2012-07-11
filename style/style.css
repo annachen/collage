@@ -3,6 +3,7 @@ body            {
                     height: 100%; 
                     padding: 0;
                     margin: 0;
+                    overflow: hidden;
                 }
 
 @leftPaneWidth: 100px;
@@ -27,22 +28,39 @@ div#leftPane    {   width: @leftPaneWidth;
 div#middlePane  {   position: absolute; 
                     left: @leftPaneWidth;
                     top: 0px;
+                    width: 100px;
                     height: 100%;
                     border-left: dotted 1px #777777;
                     border-right: dotted 1px #777777;
+                    overflow: auto;
+                    background-color: #eeeeee;
                 }
 
-div#rightPane   {   width: 300px; 
+div#rightPane   {   width: 250px; 
                     height: 100%;
                     position: absolute;
                     top: 0px;
                     right: 0px;
+                    padding-left: 7px;
+                    padding-right: 7px; 
                 }
 
 div.canvasDiv   {   position: absolute;
 					left: 0px;
                     top: 0px;
 				}
+
+div#mainCanvas  {   border: solid 3px black;
+                }
+
+canvas#mainCanvas   {   
+                        background-color: white;
+                        position: absolute;
+                    }
+
+canvas#previewCanvas    {   border: double 3px #777777;   
+                            background-color: #eeeeee; 
+                        }
 
 @logoWidth: 44px;
 @logoHeight: 36px;
@@ -52,3 +70,12 @@ div#logo        {
                     height: @logoHeight;
                     background-image:url('../img/annachen_me.png'); 
                 }
+
+div#linkInputDiv    {
+                        margin-top: 5px;
+                        margin-bottom: 5px;
+                    }
+
+div.layer           {   
+                        font-family: arial, sans-serif, serif;  
+                    }

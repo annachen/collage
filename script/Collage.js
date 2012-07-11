@@ -7,6 +7,15 @@ const TOOL_ROTATE = 'rotate';
 
 const MULTI_CANVAS = false;
 
+// These should be consistant with those in css
+const MIDDLE_BORDER_WIDTH = 1;
+const MAIN_CANVAS_BORDER_WIDTH = 0;
+const PREVIEW_CANVAS_BORDER_WIDTH = 3;
+const RIGHT_PADDING = 7;
+const LAYER_CLASS = 'layer';
+
+const PREVIEW_CANVAS_DEFAULT_HEIGHT = 230;
+
 $(function(){
 	
 	if(MULTI_CANVAS == true){
@@ -33,17 +42,17 @@ function initDisplay(){
 	var left = $("#leftPane").outerWidth();
 	var rightOut = $("#rightPane").outerWidth();
 	var rightIn = $("#rightPane").innerWidth();
-	$("#middlePane").width(all - left - rightOut);
-	$("#previewDiv").width(rightIn);
+	$("#middlePane").width(all - left - rightOut - MIDDLE_BORDER_WIDTH*2);
+	$("#previewDiv").width(rightIn - 2*RIGHT_PADDING);
 
 	//$("#mainCanvas").attr("width", all-left-right);
-	window.collageCanvas.size($("#middlePane").innerWidth(), $("#middlePane").innerHeight());
-	window.previewCanvas.size($("#previewDiv").innerWidth(), 300);
+	window.collageCanvas.size($("#middlePane").innerWidth() - 2*MAIN_CANVAS_BORDER_WIDTH, $("#middlePane").innerHeight() - 2*MAIN_CANVAS_BORDER_WIDTH);
+	window.previewCanvas.size($("#previewDiv").innerWidth() - 2*PREVIEW_CANVAS_BORDER_WIDTH , PREVIEW_CANVAS_DEFAULT_HEIGHT);
 	//window.collageCanvas.updateUI();
 	//$("#previewCanvas").attr("width", right);
 
-	//$("#mainCanvas").css("border", "solid 1px black");
-	//$("#previewCanvas").css("border", "none");
+//	$("#mainCanvas").css("border", "solid " + MAIN_CANVAS_BORDER_WIDTH + "px black");
+//	$("#previewCanvas").css("border", "solie " + PREVIEW_CANVAS_BORDER_WIDTH + "px black");
 }
 
 function initEvents(){
@@ -114,25 +123,23 @@ function initTool(){
 	window.collageCanvas.setTool(TOOL_MOVE);
 }
 
+
+// disable selection. Copied from http://stackoverflow.com/questions/2700000/how-to-disable-text-selection-using-jquery
 /*
-function dis
-
 (function($){
-
-$.fn.disableSelection = function() {
-    return this.each(function() {           
-        $(this).attr('unselectable', 'on')
-               .css({
-                   '-moz-user-select':'none',
-                   '-webkit-user-select':'none',
-                   'user-select':'none',
-                   '-ms-user-select':'none'
-               })
-               .each(function() {
-                   this.onselectstart = function() { return false; };
-               });
-    });
-};
-
+	$.fn.disableSelection = function() {
+	    return this.each(function() {           
+	        $(this).attr('unselectable', 'on')
+	               .css({
+	                   '-moz-user-select':'none',
+	                   '-webkit-user-select':'none',
+	                   'user-select':'none',
+	                   '-ms-user-select':'none'
+	               })
+	               .each(function() {
+	                   this.onselectstart = function() { return false; };
+	               });
+	    });
+	};
 })(jQuery);
 */

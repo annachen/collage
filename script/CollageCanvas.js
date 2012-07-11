@@ -50,8 +50,6 @@ function CollageCanvas(id){
 			$("#"+This.id).attr("width", This.width);
 			$("#"+This.id).attr("height", This.height);
 		}
-		//$("#"+this.id).width(this.width);
-		//$("#"+this.id).height(this.height);
 	}
 
 	this.setLayerArray = function(layerArray){

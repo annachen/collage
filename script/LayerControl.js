@@ -41,7 +41,7 @@ function LayerControl(linkId, layersDiv, collageCanvas, previewCanvas){
 
 	this.addLayer = function(){
 		var link = $("#"+This.linkId).val();
-		This.tempLayer = new Layer(link, "layer");
+		This.tempLayer = new Layer(link);
 		This.tempLayer.loadImage();
 		// wait for layer to send message back
 	}
