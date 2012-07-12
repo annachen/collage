@@ -23,6 +23,8 @@ div#leftPane    {   width: @leftPaneWidth;
                     position: absolute;
                     left: 0px;
                     top: 0px;
+                    font-family: arial, sans-serif, serif;
+                    font-size: 12px;
                 }
 
 div#middlePane  {   position: absolute; 
@@ -56,19 +58,21 @@ div#mainCanvas  {   border: solid 3px black;
 canvas#mainCanvas   {   
                         background-color: white;
                         position: absolute;
+                        left: 0px;
+                        top: 0px;
                     }
 
 canvas#previewCanvas    {   border: double 3px #777777;   
                             background-color: #eeeeee; 
                         }
 
-@logoWidth: 44px;
-@logoHeight: 36px;
+@logoWidth: 100px;
+@logoHeight: 70px;
 
 div#logo        {
                     width: @logoWidth;
                     height: @logoHeight;
-                    background-image:url('../img/annachen_me.png'); 
+                    background-image:url('../img/a_collage_light2.png'); 
                 }
 
 div#linkInputDiv    {
@@ -77,5 +81,23 @@ div#linkInputDiv    {
                     }
 
 div.layer           {   
-                        font-family: arial, sans-serif, serif;  
+                        font-family: arial, sans-serif, serif;
+                        font-size: 12px;
+                    }
+div.layer-link      {
+                        overflow: hidden;
+                        min-height:18px;
+                        padding-top: 4px;
+                        padding-left: 5px;
+                    }
+div#layers          {
+                        overflow: auto;
+                    }
+
+input#input-width   {
+                        width: 40px;
+                    }
+
+input#input-height  {
+                        width: 40px;
                     }

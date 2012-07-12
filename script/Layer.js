@@ -1,7 +1,6 @@
 
-const LAYER_FOCUS_BG = '#aaaaff';
+const LAYER_FOCUS_BG = '#dedeff';
 const LAYER_UNFOCUS_BG = '#ffffff';
-const LAYER_CLASS_LENGTH = 5; // length of the class name
 
 function Layer(link){
 
@@ -10,6 +9,7 @@ function Layer(link){
 	this.imgsrc = link;
 	this.loaded = false;
 	this.divID = "";
+	this.layerName = link;
 
 	// position of the layer on collageCanvas
 	this.posX = 0;
@@ -24,6 +24,8 @@ function Layer(link){
 
 	// angle of rotation (in radius)
 	this.angle = 0;
+
+	this.editEnabled = false;
 
 	this.loadImage = function(){
 		This.image.onload = function(){
@@ -88,7 +90,7 @@ function Layer(link){
 	this.outputLayerDiv = function(divID){
 		This.divID = divID;
 		var output = '<div id='+ This.divID +' class=' + LAYER_CLASS + '>';
-		output += '<div class=layer-link id=' + This.divID +'-link>' + This.imgsrc + '</div>';
+		output += '<div class=layer-link id=' + This.divID +'-link>' + This.layerName + '</div>';
 		output += '<input type=button value="+" class=layer-moveup id=' + This.divID +'-moveup/>';
 		output += '<input type=button value="-" class=layer-movedown id=' + This.divID + '-movedown/>';
 		output += '</div>';
@@ -111,6 +113,9 @@ function Layer(link){
 		}
 		else{
 			$("#"+This.divID).css('background-color', LAYER_UNFOCUS_BG);
+			if(This.editEnabled == true){
+				This.disableEditName();
+			}
 		}
 	}
 
@@ -195,6 +200,23 @@ function Layer(link){
 
 	this.applyAngleOffset = function(angle){
 		This.angle += angle;
+	}
+
+	this.enableEditName = function(){
+		if(This.editEnabled == false){
+			This.editEnabled = true;
+			var inputString = '<input type="text" id="'+This.divID+'-input" class="layer-inputName" value="'+This.layerName+'"/>';
+			$('#'+This.divID+'-link').html(inputString);
+		}
+	}
+
+	this.disableEditName = function(){
+		$('#'+This.divID+'-link').html(This.layerName);
+		This.editEnabled = false;
+	}
+
+	this.setName = function(name){
+		This.layerName = name;
 	}
 }
 

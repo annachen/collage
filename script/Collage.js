@@ -13,6 +13,7 @@ const MAIN_CANVAS_BORDER_WIDTH = 0;
 const PREVIEW_CANVAS_BORDER_WIDTH = 3;
 const RIGHT_PADDING = 7;
 const LAYER_CLASS = 'layer';
+const LAYER_CLASS_LENGTH = 5; // length of the class name
 
 const PREVIEW_CANVAS_DEFAULT_HEIGHT = 230;
 
@@ -45,14 +46,15 @@ function initDisplay(){
 	$("#middlePane").width(all - left - rightOut - MIDDLE_BORDER_WIDTH*2);
 	$("#previewDiv").width(rightIn - 2*RIGHT_PADDING);
 
-	//$("#mainCanvas").attr("width", all-left-right);
-	window.collageCanvas.size($("#middlePane").innerWidth() - 2*MAIN_CANVAS_BORDER_WIDTH, $("#middlePane").innerHeight() - 2*MAIN_CANVAS_BORDER_WIDTH);
+	var width = $("#middlePane").innerWidth() - 2*MAIN_CANVAS_BORDER_WIDTH;
+	var height = $("#middlePane").innerHeight() - 2*MAIN_CANVAS_BORDER_WIDTH;
+	window.collageCanvas.fullSize(width, height);
+	window.collageCanvas.size(width, height);
 	window.previewCanvas.size($("#previewDiv").innerWidth() - 2*PREVIEW_CANVAS_BORDER_WIDTH , PREVIEW_CANVAS_DEFAULT_HEIGHT);
-	//window.collageCanvas.updateUI();
-	//$("#previewCanvas").attr("width", right);
 
-//	$("#mainCanvas").css("border", "solid " + MAIN_CANVAS_BORDER_WIDTH + "px black");
-//	$("#previewCanvas").css("border", "solie " + PREVIEW_CANVAS_BORDER_WIDTH + "px black");
+	$("#layers").width(rightIn - 2*RIGHT_PADDING);
+	$("#layers").height($("#rightPane").innerHeight() - $("#linkInputDiv").outerHeight(true) - $("#previewDiv").outerHeight(true));
+
 }
 
 function initEvents(){
@@ -114,6 +116,23 @@ function initEvents(){
 			window.collageCanvas.mouseUp(e.pageX - offset.left, e.pageY - offset.top);
 		});
 	}
+	$("#input-width").focusout(function(){
+		var width = parseInt($("#input-width").val());
+		var height = parseInt($("#input-height").val());
+		window.collageCanvas.size(width, height);
+	});
+	$("#input-height").focusout(function(){
+		var width = parseInt($("#input-width").val());
+		var height = parseInt($("#input-height").val());
+		window.collageCanvas.size(width, height);
+	});
+	$(".layer-inputName").live('focusout', function(){
+		var id = $(this).attr('id');
+		var idNumStr = id.substring(LAYER_CLASS_LENGTH);
+		var layerID = parseInt(idNumStr);
+		window.layerControl.layerArray[layerID].setName($(this).val());
+		window.layerControl.layerArray[layerID].disableEditName();
+	});
 	//TODO: change cursor style
 	//$('selector').css( 'cursor', 'pointer' );
 }

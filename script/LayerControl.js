@@ -47,6 +47,11 @@ function LayerControl(linkId, layersDiv, collageCanvas, previewCanvas){
 	}
 
 	this.focusOnLayer = function(layerID){
+		if(This.focusedLayer == layerID){
+			This.layerArray[This.focusedLayer].enableEditName();
+			return;
+		}
+
 		if(This.focusedLayer >= 0)
 			This.layerArray[This.focusedLayer].unfocus();
 

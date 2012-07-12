@@ -1,4 +1,6 @@
 
+const CANVAS_EDGE_COLOR = "#979797";
+
 function CollageCanvas(id){
 
 	var This = this;
@@ -15,6 +17,8 @@ function CollageCanvas(id){
 
 	this.width = 1024;
 	this.height = 768;
+	this.fullWidth = 1024;
+	this.fullHeight = 768;
 	this.layerArray = null;
 	this.focusedLayer = -1;
 	this.tool = '';
@@ -36,20 +40,55 @@ function CollageCanvas(id){
 	}
 
 	this.size = function(width, height){
-		This.width = width;
-		This.height = height;
-		This.updateUI();
+		if(width > 0 && height > 0){
+			This.width = width;
+			This.height = height;
+			This.updateUI();
+		}
+		else{
+			alert('Invalid values.');
+			This.updateUI();
+		}
+	}
+
+	this.fullSize = function(width, height){
+		This.fullWidth = width;
+		This.fullHeight = height;
 	}
 
 	this.updateUI = function(){
 		if(MULTI_CANVAS == true){
 			$("#"+This.canvasDiv).width(This.width);
 			$("#"+This.canvasDiv).height(This.height);
+			if(This.width < This.fullWidth){
+				$("#"+This.canvasDiv).css('left', (This.fullWidth - This.width)/2);
+				$("#"+This.canvasDiv).css('border-left', 'solid 1px ' + CANVAS_EDGE_COLOR);
+				$("#"+This.canvasDiv).css('border-right', 'solid 1px ' + CANVAS_EDGE_COLOR);
+			}
+			if(This.height < This.fullHeight){
+				$("#"+This.canvasDiv).css('top', (This.fullHeight - This.height)/2);
+				$("#"+This.canvasDiv).css('border-top', 'solid 1px ' + CANVAS_EDGE_COLOR);
+				$("#"+This.canvasDiv).css('border-bottom', 'solid 1px ' + CANVAS_EDGE_COLOR);
+			}
 		}
 		else{
 			$("#"+This.id).attr("width", This.width);
 			$("#"+This.id).attr("height", This.height);
+			if(This.width < This.fullWidth){
+				$("#"+This.id).css('left', (This.fullWidth - This.width)/2);
+				$("#"+This.id).css('border-left', 'solid 1px ' + CANVAS_EDGE_COLOR);
+				$("#"+This.id).css('border-right', 'solid 1px ' + CANVAS_EDGE_COLOR);
+			}
+			if(This.height < This.fullHeight){
+				$("#"+This.id).css('top', (This.fullHeight - This.height)/2);
+				$("#"+This.id).css('border-top', 'solid 1px ' + CANVAS_EDGE_COLOR);
+				$("#"+This.id).css('border-bottom', 'solid 1px ' + CANVAS_EDGE_COLOR);
+			}
 		}
+		$("#input-width").val(This.width);
+		$("#input-height").val(This.height);
+		
+		This.draw();
 	}
 
 	this.setLayerArray = function(layerArray){
